@@ -6,7 +6,7 @@ function Player (firstName, roll, turn, score) {
   this.score = score;
 }
 
-function getRandomIntInclusive(min, max) {
+function getRoll(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -28,12 +28,15 @@ $(document).ready(function() {
     var player1 = $("input#playerOne").val();
     var player2 = $("input#playerTwo").val();
 
-    var newPlayerOne = new Player (player1)
+    var roll = getRoll(1,6);
 
-    var newPlayerTwo = new Player (player2)
-    // console.log(newPlayerOne);
-    // console.log(newPlayerTwo);
-    console.log(getRandomIntInclusive(1, 6));
+    var newPlayerOne = new Player (player1, roll)
+
+    var newPlayerTwo = new Player (player2, roll)
+    console.log(newPlayerOne);
+    console.log(newPlayerTwo);
+
+
 
 
   });
