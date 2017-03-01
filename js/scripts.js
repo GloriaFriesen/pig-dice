@@ -6,6 +6,12 @@ function Player (firstName, roll, turn, score) {
   this.score = score;
 }
 
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 
 
 
@@ -25,9 +31,9 @@ $(document).ready(function() {
     var newPlayerOne = new Player (player1)
 
     var newPlayerTwo = new Player (player2)
-    alert(newPlayerOne.firstName);
-    console.log(newPlayerOne);
-    console.log(newPlayerTwo);
+    // console.log(newPlayerOne);
+    // console.log(newPlayerTwo);
+    console.log(getRandomIntInclusive(1, 6));
 
 
   });
