@@ -1,4 +1,7 @@
 //Business Logic
+var rolls = [];
+var turns = [];
+
 function Player (firstName, roll, turn, score) {
   this.firstName = firstName,
   this.roll = roll;
@@ -12,7 +15,10 @@ function getRoll(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-
+// Player.prototype.addRoll = function () {
+//
+//   this.turn += this.roll;
+// }
 
 
 
@@ -28,16 +34,15 @@ $(document).ready(function() {
     var player1 = $("input#playerOne").val();
     var player2 = $("input#playerTwo").val();
 
-    var roll = getRoll(1,6);
+    var roll = parseInt(getRoll(1,6));
+
+    turns.push(roll);
+    console.log(turns);
 
     var newPlayerOne = new Player (player1, roll)
 
     var newPlayerTwo = new Player (player2, roll)
     console.log(newPlayerOne);
-    console.log(newPlayerTwo);
-
-
-
-
+    console.log(newPlayerTwo);     
   });
 });
