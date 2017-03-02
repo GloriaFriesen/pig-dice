@@ -8,7 +8,7 @@ function Player (firstName) {
   this.firstName = firstName;
   this.roll = 0;
   this.turn = 0;
-  // this.score = score;
+  this.score = 0;
 }
 
 Player.prototype.getRoll = function() {
@@ -19,10 +19,14 @@ Player.prototype.addRoll = function () {
   this.turn += this.roll;
 }
 
-Player.prototype.addturn = function () {
+Player.prototype.addTurn = function () {
   this.score += this.turn;
+  this.turn = 0;
 }
 
+Player.prototype.roll1 = function () {
+  this.turn = 0;
+}
 
 var totalScore = 0
 
@@ -34,27 +38,25 @@ $(document).ready(function() {
     var player1 = $("input#playerOne").val();
     var newPlayerOne = new Player (player1);
 
-
   $("#rollButton").click(function() {
     newPlayerOne.getRoll();
-// Work in progres
-    console.log(newPlayerOne.roll)
 
     if (newPlayerOne.roll <= 1){
-      alert ("Next Player")
+      newPlayerOne.roll1();
+      console.log("Rolled a 1")
     } else if (newPlayerOne.roll > 1) {
       newPlayerOne.addRoll();
     }
     console.log(newPlayerOne)
-
-
-
-
-
-
-});
+  });
+  $("#holdButton").click(function() {
+    newPlayerOne.addTurn();
+    console.log("Hold")
+    console.log(newPlayerOne)
+  });
 
   });
+
 });
 // Work in progres
   //   var totalTurn = 0
