@@ -30,19 +30,17 @@
   * Example Input: Cameron {5, 0}
   * Example Output: Cameron {0, 5}
 
-6. Program with switch between Player objects
-  * Example Input: Cameron {0, 5}
-  * Example Output: Gloria {0, 0}
-
-7. Forcibly end turn on roll of 1
+6. Forcibly end turn on roll of 1
   * Example Input: Cameron - random (1)
   * Example Output: Gloria turn
 
-8. End game when total score equals 100 points
+7. End game when total score equals 100 points
   * Example Input: Gloria {0, 100}
   * Example Output: Gloria wins!
 
-
+8. Program with switch between Player objects
+  * Example Input: Cameron {0, 5}
+  * Example Output: Gloria {0, 0}
 
 
 ## Setup/Installation Requirements
