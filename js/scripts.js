@@ -1,6 +1,7 @@
 //Business Logic
 var rolls = [];
 var turns = [];
+var scores = [];
 
 function Player (firstName, roll, turn, score) {
   this.firstName = firstName,
@@ -33,14 +34,26 @@ $(document).ready(function() {
     var player2 = $("input#playerTwo").val();
 
     var roll = parseInt(getRoll(1,6));
-
-
-    turns.push(roll);
-    console.log(turns);
     var totalTurn = 0
-    turns.forEach(function(turn) {
-      totalTurn += turn
+
+    $("#holdButton").click(function(){
+      $(this).data('clicked', true);
+      turns = [];
     });
+
+    if (roll <= 1) {
+      totalTurn = 0;
+    } else if (roll > 1) {
+      turns.push(roll);
+      turns.forEach(function(turn) {
+      totalTurn += turn
+      });
+      if ($('#holdButton').data('clicked')) {
+        scores.push(totalTurn);
+      }
+    }
+
+    console.log(turns);
     console.log(totalTurn);
 
     var newPlayerOne = new Player (player1, roll, totalTurn)
