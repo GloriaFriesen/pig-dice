@@ -78,11 +78,22 @@ $(document).ready(function() {
 
 
   $("#holdButton").click(function() {
-    newPlayer.addTurn();
-    newPlayerOne.switchTurn();
-    newPlayer.checkWinner();
-    console.log(newPlayerOne)
-    console.log(newPlayerTwo)
+    if (newPlayerOne.playerTurn === true && newPlayerTwo.playerTurn === false) {
+      newPlayerOne.addTurn();
+      newPlayerOne.switchTurnFalse();
+      newPlayerTwo.switchTurnTrue();
+      newPlayerOne.checkWinner();
+    } else if (newPlayerTwo.playerTurn === true && newPlayerOne.playerTurn === false) {
+      newPlayerTwo.addTurn();
+      newPlayerTwo.switchTurnFalse();
+      newPlayerOne.switchTurnTrue();
+      newPlayerTwo.checkWinner();
+    }
+    // newPlayer.addTurn();
+    // newPlayerOne.switchTurn();
+    // newPlayer.checkWinner();
+    // console.log(newPlayerOne)
+    // console.log(newPlayerTwo)
   });
 });
 });
