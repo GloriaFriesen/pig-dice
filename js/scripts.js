@@ -28,6 +28,12 @@ Player.prototype.roll1 = function () {
   this.turn = 0;
 }
 
+Player.prototype.checkWinner = function() {
+  if (this.score >= 100) {
+    alert("You've Won!");
+  }
+}
+
 var totalScore = 0
 
 //User Logic
@@ -43,7 +49,6 @@ $(document).ready(function() {
 
     if (newPlayerOne.roll <= 1){
       newPlayerOne.roll1();
-      console.log("Rolled a 1")
     } else if (newPlayerOne.roll > 1) {
       newPlayerOne.addRoll();
     }
@@ -51,7 +56,7 @@ $(document).ready(function() {
   });
   $("#holdButton").click(function() {
     newPlayerOne.addTurn();
-    console.log("Hold")
+    newPlayerOne.checkWinner();
     console.log(newPlayerOne)
   });
 
