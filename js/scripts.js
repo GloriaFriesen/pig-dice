@@ -47,8 +47,10 @@ $(document).ready(function() {
     var newPlayerOne = new Player (firstName1);
     var firstName2 = $("input#playerTwo").val();
     var newPlayerTwo = new Player (firstName2);
-
     newPlayerTwo.playerTurn = false;
+
+    $("#playerOneName").html("<h2>" + newPlayerOne.firstName + "</h2>");
+    $("#playerTwoName").html("<h2>" + newPlayerTwo.firstName + "</h2>");
 
   $("#rollButton").click(function() {
     if (newPlayerOne.playerTurn === true && newPlayerTwo.playerTurn === false) {
@@ -59,6 +61,7 @@ $(document).ready(function() {
         $("#playerOneTurn").html("<h4>You've Rolled a One. End of Turn.</h4>");
         newPlayerOne.switchTurnFalse();
         newPlayerTwo.switchTurnTrue();
+        return newPlayerOne.turn;
       } else if (newPlayerOne.roll > 1) {
         newPlayerOne.addRoll();
         $("#playerOneTurn").html("<h4>Current Turn " + newPlayerOne.turn + "</h4>");
@@ -73,6 +76,7 @@ $(document).ready(function() {
         $("#playerTwoTurn").html("<h4>You've Rolled a One. End of Turn.</h4>");
         newPlayerOne.switchTurnTrue();
         newPlayerTwo.switchTurnFalse();
+        return newPlayerTwo.turn;
       } else if (newPlayerTwo.roll > 1) {
         newPlayerTwo.addRoll();
         $("#playerTwoTurn").html("<h4>Current Turn " + newPlayerTwo.turn + "</h4>");
@@ -96,11 +100,6 @@ $(document).ready(function() {
       newPlayerOne.switchTurnTrue();
       newPlayerTwo.checkWinner();
     }
-    // newPlayer.addTurn();
-    // newPlayerOne.switchTurn();
-    // newPlayer.checkWinner();
-    // console.log(newPlayerOne)
-    // console.log(newPlayerTwo)
   });
 });
 });
