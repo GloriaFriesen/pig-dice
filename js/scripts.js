@@ -1,14 +1,18 @@
 //Business Logic
-var rolls = [];
-var turns = [];
-var scores = [];
-var finalScore = [];
-
 function Player (firstName) {
   this.firstName = firstName;
+  this.playerTurn = true;
   this.roll = 0;
   this.turn = 0;
   this.score = 0;
+}
+
+Player.prototype.switchTurnTrue = function() {
+  this.playerTurn = true;
+}
+
+Player.prototype.switchTurnFalse = function() {
+  this.playerTurn = false;
 }
 
 Player.prototype.getRoll = function() {
@@ -34,67 +38,51 @@ Player.prototype.checkWinner = function() {
   }
 }
 
-var totalScore = 0
-
 //User Logic
 $(document).ready(function() {
   $("#playerForm").submit(function(){
     event.preventDefault();
 
-    var player1 = $("input#playerOne").val();
-    var newPlayerOne = new Player (player1);
+    var firstName1 = $("input#playerOne").val();
+    var newPlayerOne = new Player (firstName1);
+    var firstName2 = $("input#playerTwo").val();
+    var newPlayerTwo = new Player (firstName2);
+
+    newPlayerTwo.playerTurn = false;
 
   $("#rollButton").click(function() {
-    newPlayerOne.getRoll();
+    if (newPlayerOne.playerTurn === true && newPlayerTwo.playerTurn === false) {
+        newPlayerOne.getRoll();
+      if (newPlayerOne.roll <= 1){
+        newPlayerOne.roll1();
+        newPlayerOne.switchTurnFalse();
+        newPlayerTwo.switchTurnTrue();
+      } else if (newPlayerOne.roll > 1) {
+        newPlayerOne.addRoll();
+      }
+    }
 
-    if (newPlayerOne.roll <= 1){
-      newPlayerOne.roll1();
-    } else if (newPlayerOne.roll > 1) {
-      newPlayerOne.addRoll();
+    if (newPlayerTwo.playerTurn === true && newPlayerOne.playerTurn === false) {
+      newPlayerTwo.getRoll();
+      if (newPlayerTwo.roll <= 1) {
+        newPlayerTwo.roll1();
+        newPlayerOne.switchTurnTrue();
+        newPlayerTwo.switchTurnFalse();
+      } else if (newPlayerTwo.roll > 1) {
+        newPlayerTwo.addRoll();
+      }
     }
     console.log(newPlayerOne)
+    console.log(newPlayerTwo)
   });
+
+
   $("#holdButton").click(function() {
-    newPlayerOne.addTurn();
-    newPlayerOne.checkWinner();
+    newPlayer.addTurn();
+    newPlayerOne.switchTurn();
+    newPlayer.checkWinner();
     console.log(newPlayerOne)
+    console.log(newPlayerTwo)
   });
-
-  });
-
 });
-// Work in progres
-  //   var totalTurn = 0
-  //
-  //   if (roll <= 1) {
-  //     totalTurn = 0;
-  //     turns = [];
-  //   } else if (roll > 1) {
-  //     turns.push(roll);
-  //     turns.forEach(function(turn) {
-  //     totalTurn += turn
-  //     });
-  //   }
-  //
-  //   $("#holdButton").click(function(){
-  //     $(this).data('clicked', true);
-  //     turns = [];
-  //     scores = [];
-  //     scores.push(totalTurn);
-  //     scores.forEach(function(score) {
-  //     totalScore += score
-  //     finalScore.push(totalScore);
-  //     });
-  //   });
-  //   console.log(scores);
-  //   console.log(turns);
-  //   console.log(totalTurn);
-  //   console.log(totalScore);
-  //   console.log(finalScore);
-  //
-  //   var newPlayerOne = new Player (player1, roll, totalTurn, totalScore)
-  //
-  //   var newPlayerTwo = new Player (player2, roll, totalTurn, totalScore)
-  //   console.log(newPlayerOne);
-  //   console.log(newPlayerTwo);
-  // });
+});
