@@ -34,7 +34,7 @@ Player.prototype.roll1 = function () {
 
 Player.prototype.checkWinner = function() {
   if (this.score >= 100) {
-    alert("You've Won!");
+    return true;
   }
 }
 
@@ -93,12 +93,18 @@ $(document).ready(function() {
       newPlayerOne.switchTurnFalse();
       newPlayerTwo.switchTurnTrue();
       newPlayerOne.checkWinner();
+      if (newPlayerOne.checkWinner()) {
+        $("#playerOneWinner").html("<h2>" + newPlayerOne.firstName + " Won!</h2>");
+      }
     } else if (newPlayerTwo.playerTurn === true && newPlayerOne.playerTurn === false) {
       newPlayerTwo.addTurn();
       $("#playerTwoScore").html("<h4>Score " + newPlayerTwo.score + "</h4>");
       newPlayerTwo.switchTurnFalse();
       newPlayerOne.switchTurnTrue();
-      newPlayerTwo.checkWinner();
+      if (newPlayerTwo.checkWinner()) {
+        $("#playerTwoWinner").html("<h2>" + newPlayerTwo.firstName + " Won!</h2>");
+      }
+
     }
   });
 });
